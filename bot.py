@@ -21,7 +21,7 @@ def start_handler(message):
     rezult = db_object.fetchone()
 
     if not rezult:
-        db_object.execute("INSERT INTO User(id, username) VALUES (%s, %s, %s)", (id, username))
+        db_object.execute("INSERT INTO User(id, username) VALUES (%s, %s)", (id, username))
         db_connection.commit()
 
     markup = types.InlineKeyboardMarkup()
