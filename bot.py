@@ -19,13 +19,6 @@ db_object = db_connection.cursor()
 @bot.message_handler(commands=['start', 'menu'])
 def start_handler(message):
     id = message.chat.id
-   # db_object.execute(f"SELECT id FROM User WHERE id = {id}")
-    #username = message.chat.first_name
-    #rezult = db_object.fetchone()
-
-    #if not rezult:
-     #   db_object.execute("INSERT INTO User(id, username) VALUES (%s, %s)", (id, username))
-      #  db_connection.commit()
 
     markup = types.InlineKeyboardMarkup()
     btn1 = types.InlineKeyboardButton(text="зміна розкладу", callback_data='task')
@@ -44,6 +37,14 @@ def start_handler(message):
         f"Привіт {message.chat.first_name} {message.chat.last_name}, натисни кнопку!",
         reply_markup=markup
     )
+    db_object.execute(f"SELECT id FROM User WHERE id = {id}")
+    username = message.chat.first_name
+    rezult = db_object.fetchone()
+
+    if not rezult:
+        db_object.execute("INSERT INTO User(id, username) VALUES (%s, %s)", (id, username))
+        db_connection.commit()
+
 
 
 @server.route(f"/{BOT_TOKEN}", methods=["POST"])
