@@ -3,13 +3,26 @@ import telebot
 from telebot import types
 from config import *
 from flask import Flask, request
+import psycopg2
 
 bot = telebot.TeleBot(BOT_TOKEN)
 server = Flask(__name__)
 
+
+db_connection = psycopg2.connect(DB_URI, sslmode=
+                                 'require')
+db_object = db_connection.cursor()
+
 @bot.message_handler(commands=['start', 'menu'])
 def start_handler(message):
+    id = message.from_user.id
+    db_object.execute(f"SELECT id FROM user WHERE id = {id}")
+    username = message.from_user.usrrname
+    rezult = db_object.fetchone()
 
+    if not rezult:
+        db_object.execute("INSERT INTO User(id, username) VALUES (%$, %$, %$)", (id, username))
+        db_connection.commit()
 
     markup = types.InlineKeyboardMarkup()
     btn1 = types.InlineKeyboardButton(text="зміна розкладу", callback_data='task')
