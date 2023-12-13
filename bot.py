@@ -17,7 +17,7 @@ db_object = db_connection.cursor()
 def start_handler(message):
     id = message.chat.id
     db_object.execute(f"SELECT id FROM User WHERE id = {id}")
-    username = message.chat.full_name
+    username = message.chat.first_name
     rezult = db_object.fetchone()
 
     if not rezult:
