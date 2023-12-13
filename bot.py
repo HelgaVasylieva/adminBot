@@ -15,9 +15,9 @@ db_object = db_connection.cursor()
 
 @bot.message_handler(commands=['start', 'menu'])
 def start_handler(message):
-    id = message.from_user.id
+    id = message.chat.id
     db_object.execute(f"SELECT id FROM user WHERE id = {id}")
-    username = message.from_user.usrrname
+    username = message.chat.full_name
     rezult = db_object.fetchone()
 
     if not rezult:
