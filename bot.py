@@ -2,11 +2,14 @@ import os
 import telebot
 from telebot import types
 from config import *
+import logging
 from flask import Flask, request
 import psycopg2
 
 bot = telebot.TeleBot(BOT_TOKEN)
 server = Flask(__name__)
+logger = telebot.logger
+logger.setLevel(logger.DEBUG)
 
 
 db_connection = psycopg2.connect(DB_URI, sslmode=
