@@ -36,16 +36,16 @@ def start_handler(message):
         f"Привіт {message.chat.first_name} {message.chat.last_name}, натисни кнопку!",
         reply_markup=markup
     )
-    #db_object.execute(f"SELECT id FROM User WHERE id = {id}")
+    cur.execute(f"SELECT id FROM Users WHERE id = {id}")
     username = message.from_user.first_name
-    #rezult = db_object.fetchone()
+    rezult = cur.fetchone()
 
-    #if not rezult:
+    if not rezult:
 
-    cur.execute("CREATE TABLE Users (id serial PRIMARY KEY, num integer, username varchar)")
-    cur.execute("INSERT INTO Users (id, username) VALUES (%s, %s)",
-                (id, username))
-    conn.commit()
+        cur.execute("CREATE TABLE Users (id serial PRIMARY KEY, username varchar)")
+        cur.execute("INSERT INTO Users (id, username) VALUES (%s, %s)",
+                    (id, username))
+        conn.commit()
 
 
 @server.route(f"/{BOT_TOKEN}", methods=["POST"])
