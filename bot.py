@@ -42,7 +42,7 @@ def start_handler(message):
 
     #if not rezult:
 
-    cur.execute("INSERT INTO users (id, username) VALUES (%s, %s)",
+    cur.execute("INSERT INTO Users (id, username) VALUES (%s, %s)",
                 (id, username))
     conn.commit()
 
