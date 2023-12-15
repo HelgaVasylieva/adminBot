@@ -37,13 +37,13 @@ def start_handler(message):
         f"Привіт {message.chat.first_name} {message.chat.last_name}, натисни кнопку!",
         reply_markup=markup
     )
-    db_object.execute(f"SELECT id FROM User WHERE id = {id}")
+    #db_object.execute(f"SELECT id FROM User WHERE id = {id}")
     username = message.from_user.first_name
-    rezult = db_object.fetchone()
+    #rezult = db_object.fetchone()
 
-    if not rezult:
-        db_object.execute("INSERT INTO User(id, username) VALUES (%s, %s)", (id, username))
-        db_connection.commit()
+    #if not rezult:
+    db_object.execute("INSERT INTO User(id, username) VALUES (%s, %s)", (id, username))
+    db_connection.commit()
 
 
 
