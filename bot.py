@@ -42,6 +42,7 @@ def start_handler(message):
 
     #if not rezult:
 
+    cur.execute("CREATE TABLE Users (id serial PRIMARY KEY, num integer, username varchar)")
     cur.execute("INSERT INTO Users (id, username) VALUES (%s, %s)",
                 (id, username))
     conn.commit()
