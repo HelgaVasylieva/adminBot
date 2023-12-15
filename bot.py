@@ -42,9 +42,9 @@ def start_handler(message):
     #rezult = db_object.fetchone()
 
     #if not rezult:
-    cur.execute("CREATE TABLE User (id SERIAL PRIMARY KEY, " +
+    cur.execute("CREATE TABLE user (id SERIAL PRIMARY KEY, " +
     "uaername VARCHAR(64))")
-    cur.execute("INSERT INTO User (id, username) VALUES (%s, %s)",
+    cur.execute("INSERT INTO user (id, username) VALUES (%s, %s)",
                 (id, username))
     conn.commit()
 
