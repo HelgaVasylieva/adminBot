@@ -18,7 +18,7 @@ db_object = db_connection.cursor()
 
 @bot.message_handler(commands=['start', 'menu'])
 def start_handler(message):
-    id = message.chat.id
+    id = message.from_user.id
 
     markup = types.InlineKeyboardMarkup()
     btn1 = types.InlineKeyboardButton(text="зміна розкладу", callback_data='task')
@@ -38,7 +38,7 @@ def start_handler(message):
         reply_markup=markup
     )
     db_object.execute(f"SELECT id FROM User WHERE id = {id}")
-    username = message.chat.first_name
+    username = message.from_user.first_name
     rezult = db_object.fetchone()
 
     if not rezult:
