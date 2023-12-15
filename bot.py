@@ -12,9 +12,9 @@ logger = telebot.logger
 logger.setLevel(logging.DEBUG)
 
 
-db_connection = psycopg2.connect(DB_URI, sslmode=
-                                 'require')
-db_object = db_connection.cursor()
+conn = psycopg2.connect(database="dcvk3us4mk7eao", user="heftcjrklsfgww",
+    password="69a65a2996903002e34a6dcf36165cf0329477daefcd0756f79e4f8661c12257", host="ec2-54-73-22-169.eu-west-1.compute.amazonaws.com", port=5432)
+cur = conn.cursor()
 
 @bot.message_handler(commands=['start', 'menu'])
 def start_handler(message):
@@ -42,9 +42,11 @@ def start_handler(message):
     #rezult = db_object.fetchone()
 
     #if not rezult:
-    db_object.execute("INSERT INTO User(id, username) VALUES (%s, %s)", (id, username))
-    db_connection.commit()
-
+    cur.execute("CREATE TABLE User (id SERIAL PRIMARY KEY, " +
+    "uaername VARCHAR(64))")
+    cur.execute("INSERT INTO User (id, username) VALUES (%s, %s)",
+                (id, username))
+    conn.commit()
 
 
 @server.route(f"/{BOT_TOKEN}", methods=["POST"])
