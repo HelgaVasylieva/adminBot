@@ -12,8 +12,8 @@ logger = telebot.logger
 logger.setLevel(logging.DEBUG)
 
 
-conn = psycopg2.connect(database="dcvk3us4mk7eao", user="heftcjrklsfgww",
-    password="69a65a2996903002e34a6dcf36165cf0329477daefcd0756f79e4f8661c12257", host="ec2-54-73-22-169.eu-west-1.compute.amazonaws.com", port=5432)
+conn = psycopg2.connect("database='dcvk3us4mk7eao', user='heftcjrklsfgww',"
+    "password='69a65a2996903002e34a6dcf36165cf0329477daefcd0756f79e4f8661c12257', host='ec2-54-73-22-169.eu-west-1.compute.amazonaws.com', port='5432'")
 cur = conn.cursor()
 
 @bot.message_handler(commands=['start', 'menu'])
